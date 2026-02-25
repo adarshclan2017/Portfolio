@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { api } from "../api/api";
-import "../styles/projects.css";
+import "../styles/Projects.css";
 
 function parseTechList(tech) {
   if (!tech) return [];
