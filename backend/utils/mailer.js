@@ -1,29 +1,13 @@
-import nodemailer from "nodemailer";
+import { Resend } from "resend";
 
-export function makeTransport() {
-  return nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 587,
-    secure: false, // for 587
-    auth: {
-      user: process.env.MAIL_USER,
-      pass: process.env.MAIL_PASS, // Gmail App Password
-    },
-    requireTLS: true,
-    tls: {
-      servername: "smtp.gmail.com",
-    },
-  });
-}
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function sendContactMail({ name, email, message }) {
-  const transport = makeTransport();
-
-  await transport.sendMail({
-    from: process.env.MAIL_USER,
+  await resend.emails.send({
+    from: "Portfolio <onboarding@resend.dev>", // works immediately
     to: process.env.MAIL_TO,
     subject: `New Portfolio Message from ${name}`,
+    reply_to: email,
     text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
-    replyTo: email, 
   });
 }
