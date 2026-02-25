@@ -73,7 +73,7 @@ export default function Contact() {
       <div className="cContainer">
         <div className="cHead">
           <h2 className="cTitle">Contact</h2>
-          <p className="cSub">Send a message (it will be saved in MongoDB).</p>
+          <p className="cSub">Send a message .</p>
         </div>
 
         <div className="cGrid">
