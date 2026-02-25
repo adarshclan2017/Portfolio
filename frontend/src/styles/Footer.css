@@ -1,0 +1,229 @@
+/* Footer.css */
+
+:root{
+  --text:#e9ecff;
+  --muted:rgba(233,236,255,.70);
+  --muted2:rgba(233,236,255,.55);
+
+  --cardA:rgba(255,255,255,.08);
+  --cardB:rgba(255,255,255,.04);
+
+  --stroke:rgba(255,255,255,.12);
+  --stroke2:rgba(255,255,255,.08);
+
+  --shadow:0 18px 60px rgba(0,0,0,.45);
+}
+
+/* ---------- Footer Wrapper ---------- */
+.foot{
+  margin-top: 60px;
+  padding: 48px 18px 18px;
+  background:
+    radial-gradient(900px 500px at 10% 0%, rgba(99,102,241,.15), transparent 60%),
+    radial-gradient(900px 500px at 90% 0%, rgba(236,72,153,.12), transparent 60%),
+    linear-gradient(180deg, rgba(8,10,20,.95), rgba(6,7,18,1));
+  color: var(--text);
+  border-top: 1px solid var(--stroke2);
+}
+
+/* ---------- Main Content ---------- */
+.footInner{
+  width: min(1120px, 100%);
+  margin: 0 auto;
+  padding: 28px;
+  border-radius: 26px;
+
+  background: linear-gradient(180deg, var(--cardA), var(--cardB));
+  border: 1px solid var(--stroke);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(12px);
+
+  display:grid;
+  grid-template-columns: 1.2fr .8fr 1fr;
+  gap: 28px;
+}
+
+/* ---------- Brand Section ---------- */
+.footBrand{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.footTitle{
+  margin:0;
+  font-size: 20px;
+  font-weight: 950;
+  letter-spacing: -0.3px;
+}
+
+.footGrad{
+  background: linear-gradient(90deg, #a78bfa, #60a5fa, #22c55e);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.footSub{
+  margin:0;
+  font-size: 13.8px;
+  color: var(--muted);
+  line-height:1.6;
+  max-width: 260px;
+}
+
+/* ---------- Social Icons ---------- */
+.footSocial{
+  display:flex;
+  gap:12px;
+  margin-top: 6px;
+}
+
+.footSocial a{
+  width:42px;
+  height:42px;
+  border-radius: 14px;
+  display:grid;
+  place-items:center;
+
+  background: rgba(255,255,255,.06);
+  border: 1px solid var(--stroke2);
+  color: rgba(233,236,255,.9);
+
+  transition: transform .15s ease, background .15s ease, border-color .15s ease;
+}
+
+.footSocial a:hover{
+  transform: translateY(-2px);
+  background: rgba(255,255,255,.12);
+  border-color: rgba(255,255,255,.20);
+}
+
+/* ---------- Navigation Section ---------- */
+.footNav{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.footNavTitle{
+  margin:0;
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: -0.2px;
+}
+
+.footNavLinks{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.footNavLinks a{
+  text-decoration:none;
+  font-size: 13.5px;
+  color: var(--muted);
+  transition: color .15s ease, transform .15s ease;
+}
+
+.footNavLinks a:hover{
+  color: var(--text);
+  transform: translateX(4px);
+}
+
+/* ---------- CTA Section ---------- */
+.footCTA{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.footText{
+  margin:0;
+  font-size: 13.5px;
+  color: var(--muted);
+  line-height:1.6;
+}
+
+.footBtn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  padding:12px 14px;
+  border-radius: 16px;
+
+  background: linear-gradient(90deg, #a78bfa, #60a5fa);
+  color:#08101f;
+  text-decoration:none;
+  font-weight: 900;
+  border: 1px solid rgba(255,255,255,.18);
+
+  transition: transform .15s ease, filter .15s ease;
+  box-shadow: 0 16px 44px rgba(96,165,250,.22);
+}
+
+.footBtn:hover{
+  transform: translateY(-2px);
+  filter: saturate(1.05);
+}
+
+/* Back to top */
+.footTopBtn{
+  margin-top: 4px;
+  padding:10px 12px;
+  border-radius: 14px;
+  border:1px solid var(--stroke2);
+  background: rgba(255,255,255,.06);
+  color: rgba(233,236,255,.85);
+  cursor:pointer;
+  font-weight: 800;
+  transition: transform .15s ease, background .15s ease;
+}
+
+.footTopBtn:hover{
+  transform: translateY(-1px);
+  background: rgba(255,255,255,.12);
+}
+
+/* ---------- Bottom ---------- */
+.footBottom{
+  width: min(1120px, 100%);
+  margin: 18px auto 0;
+  padding-top: 14px;
+
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  flex-wrap:wrap;
+
+  font-size: 12.5px;
+  color: var(--muted2);
+
+  border-top: 1px solid rgba(255,255,255,.08);
+}
+
+.footDivider{
+  opacity:.5;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 920px){
+  .footInner{
+    grid-template-columns: 1fr;
+  }
+
+  .footSub{
+    max-width: none;
+  }
+}
+
+/* ---------- Accessibility ---------- */
+.footNavLinks a:focus-visible,
+.footSocial a:focus-visible,
+.footBtn:focus-visible,
+.footTopBtn:focus-visible{
+  outline: 2px solid rgba(96,165,250,.75);
+  outline-offset: 3px;
+  border-radius: 14px;
+}

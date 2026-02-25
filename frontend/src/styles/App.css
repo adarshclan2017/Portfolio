@@ -1,0 +1,39 @@
+/* GLOBAL THEME VARIABLES */
+
+/* default theme = dark */
+:root{
+  --page-bg: #060712;
+  --page-bg2:#070a14;
+
+  --glass: rgba(255,255,255,0.08);
+  --glass2: rgba(255,255,255,0.04);
+  --border: rgba(255,255,255,0.12);
+
+  --text: #e9ecff;
+  --muted: rgba(233,236,255,0.72);
+
+  --shadow: 0 18px 60px rgba(0,0,0,0.55);
+  --shadow2: 0 16px 44px rgba(0,0,0,0.35);
+}
+
+/* light theme (when body has class "dark") */
+body.dark{
+  --page-bg: #f5f7fb;
+  --page-bg2:#ffffff;
+
+  --glass: rgba(255,255,255,0.75);
+  --glass2: rgba(255,255,255,0.50);
+  --border: rgba(0,0,0,0.10);
+
+  --text:#111827;
+  --muted: rgba(17,24,39,0.70);
+
+  --shadow: 0 18px 60px rgba(0,0,0,0.12);
+  --shadow2: 0 16px 44px rgba(0,0,0,0.10);
+}
+
+body{
+  background: linear-gradient(180deg, var(--page-bg), var(--page-bg2));
+  color: var(--text);
+  transition: background .25s ease, color .25s ease;
+}

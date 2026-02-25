@@ -1,0 +1,683 @@
+/* about.css */
+
+:root{
+  --bg0:#060712;
+  --bg1:#070a14;
+  --text:#e9ecff;
+  --muted:rgba(233,236,255,.74);
+  --muted2:rgba(233,236,255,.60);
+
+  --cardA:rgba(255,255,255,.08);
+  --cardB:rgba(255,255,255,.04);
+
+  --stroke:rgba(255,255,255,.12);
+  --stroke2:rgba(255,255,255,.09);
+
+  --shadow:0 18px 60px rgba(0,0,0,.55);
+  --shadow2:0 16px 44px rgba(0,0,0,.35);
+
+  --r1:26px;
+  --r2:20px;
+}
+
+.abWrap{
+  min-height:100vh;
+  position:relative;
+  overflow:hidden;
+  padding:64px 18px;
+  color:var(--text);
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
+  background:
+    radial-gradient(1200px 700px at 15% 10%, rgba(99,102,241,.22), transparent 60%),
+    radial-gradient(900px 550px at 85% 18%, rgba(236,72,153,.16), transparent 55%),
+    radial-gradient(1100px 700px at 50% 95%, rgba(34,197,94,.10), transparent 60%),
+    linear-gradient(180deg, var(--bg0), var(--bg1));
+}
+
+.abBg{
+  position:absolute;
+  inset:-80px;
+  pointer-events:none;
+  z-index:0;
+  filter: blur(26px);
+  opacity:.95;
+}
+
+.abOrb{
+  position:absolute;
+  width:520px;
+  height:520px;
+  border-radius:999px;
+  animation: abFloat 12s ease-in-out infinite;
+}
+.abOrb.a1{
+  left:4%;
+  top:6%;
+  background: radial-gradient(circle at 30% 30%, rgba(99,102,241,.85), rgba(99,102,241,.08));
+}
+.abOrb.a2{
+  right:6%;
+  top:10%;
+  width:620px;
+  height:620px;
+  animation-duration:14s;
+  background: radial-gradient(circle at 30% 30%, rgba(236,72,153,.75), rgba(236,72,153,.08));
+}
+.abOrb.a3{
+  left:30%;
+  bottom:-10%;
+  width:720px;
+  height:720px;
+  animation-duration:16s;
+  background: radial-gradient(circle at 30% 30%, rgba(34,197,94,.30), rgba(34,197,94,.06));
+}
+.abGrid{
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(to right, rgba(255,255,255,.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,.05) 1px, transparent 1px);
+  background-size:120px 120px;
+  opacity:.10;
+  filter: blur(0px);
+}
+
+@keyframes abFloat{
+  0%,100%{ transform: translate3d(0,0,0) scale(1); }
+  50%{ transform: translate3d(14px,18px,0) scale(1.03); }
+}
+
+.abHeader{
+  width:min(1120px, 100%);
+  margin:0 auto 22px;
+  position:relative;
+  z-index:1;
+  padding:28px;
+  border-radius: var(--r1);
+  background: linear-gradient(180deg, var(--cardA), var(--cardB));
+  border:1px solid var(--stroke);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(10px);
+}
+
+.abBadge{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:8px 12px;
+  border-radius:999px;
+  font-size:13px;
+  color: rgba(233,236,255,.90);
+  background: rgba(255,255,255,.06);
+  border:1px solid var(--stroke2);
+}
+
+.abDot{
+  width:9px;
+  height:9px;
+  border-radius:999px;
+  background:#22c55e;
+  box-shadow:0 0 0 4px rgba(34,197,94,.16);
+}
+
+.abTitle{
+  margin:14px 0 8px;
+  font-size: clamp(30px, 3.5vw, 44px);
+  letter-spacing:-0.6px;
+  line-height:1.1;
+}
+
+.abGrad{
+  background: linear-gradient(90deg, #a78bfa, #60a5fa, #22c55e);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+
+.abPara{
+  margin:0;
+  max-width: 85ch;
+  color: var(--muted);
+  line-height:1.75;
+  font-size:15.5px;
+}
+
+.abHeaderRow{
+  margin-top:18px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  flex-wrap:wrap;
+}
+
+.abProfile{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.abAvatar{
+  width:52px;
+  height:52px;
+  border-radius:18px;
+  display:grid;
+  place-items:center;
+  font-weight: 950;
+  color:#08101f;
+  background: linear-gradient(135deg, #a78bfa, #60a5fa, #22c55e);
+}
+
+.abName{
+  font-weight: 900;
+  letter-spacing: -0.2px;
+}
+
+.abRole{
+  margin-top:4px;
+  font-size:13px;
+  color: var(--muted2);
+}
+
+.abHeaderBtns{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.abBtnPrimary,
+.abBtnSoft{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:12px 14px;
+  border-radius:14px;
+  font-weight: 850;
+  text-decoration:none;
+  transition: transform .15s ease, background .15s ease, border-color .15s ease, filter .15s ease;
+  user-select:none;
+}
+
+.abBtnPrimary{
+  color:#08101f;
+  background: linear-gradient(90deg, #a78bfa, #60a5fa);
+  border:1px solid rgba(255,255,255,.18);
+  box-shadow: 0 16px 44px rgba(96,165,250,.22);
+}
+.abBtnPrimary:hover{ transform: translateY(-1px); filter:saturate(1.06); }
+
+.abBtnSoft{
+  color: rgba(233,236,255,.92);
+  background: rgba(255,255,255,.06);
+  border:1px solid var(--stroke);
+}
+.abBtnSoft:hover{
+  transform: translateY(-1px);
+  background: rgba(255,255,255,.09);
+  border-color: rgba(255,255,255,.18);
+}
+
+/* Layout Grids */
+.abGrid2{
+  width:min(1120px, 100%);
+  margin: 0 auto 22px;
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:14px;
+  position:relative;
+  z-index:1;
+}
+@media (max-width: 920px){
+  .abGrid2{ grid-template-columns: 1fr; }
+}
+
+.abGrid3{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap:14px;
+}
+@media (max-width: 1020px){
+  .abGrid3{ grid-template-columns: 1fr; }
+}
+
+.abSection{
+  width:min(1120px, 100%);
+  margin: 0 auto 22px;
+  position:relative;
+  z-index:1;
+}
+
+.abSectionHead{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom: 12px;
+  padding: 0 4px;
+}
+@media (max-width: 700px){
+  .abSectionHead{ flex-direction:column; align-items:flex-start; }
+}
+
+.abH3{
+  margin:0;
+  font-size:18px;
+  letter-spacing:-0.3px;
+  display:flex;
+  gap:10px;
+  align-items:center;
+}
+
+.abIcon{
+  width:34px;
+  height:34px;
+  border-radius:14px;
+  display:grid;
+  place-items:center;
+  background: rgba(255,255,255,.07);
+  border:1px solid var(--stroke2);
+}
+
+.abSub{
+  margin:6px 0 0;
+  color: var(--muted2);
+  font-size:13px;
+  line-height:1.5;
+}
+
+.abHint{
+  font-size:12px;
+  color: rgba(233,236,255,.62);
+  padding:8px 10px;
+  border-radius:999px;
+  background: rgba(255,255,255,.06);
+  border:1px solid var(--stroke2);
+}
+
+/* Cards */
+.abCard{
+  padding:18px;
+  border-radius: var(--r1);
+  background: linear-gradient(180deg, var(--cardA), var(--cardB));
+  border:1px solid var(--stroke);
+  box-shadow: var(--shadow2);
+  backdrop-filter: blur(10px);
+}
+
+.abGlow{
+  position:relative;
+}
+.abGlow:before{
+  content:"";
+  position:absolute;
+  inset:-1px;
+  border-radius: inherit;
+  background: linear-gradient(90deg, rgba(167,139,250,.35), rgba(96,165,250,.25), rgba(34,197,94,.18));
+  opacity:.28;
+  z-index:-1;
+  filter: blur(12px);
+}
+
+.abCardTitle{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight: 900;
+  letter-spacing:-0.2px;
+  margin-bottom: 10px;
+}
+
+.abCardTitle i{
+  width:34px;
+  height:34px;
+  border-radius:14px;
+  display:grid;
+  place-items:center;
+  background: rgba(255,255,255,.07);
+  border:1px solid var(--stroke2);
+}
+
+/* Lists */
+.abList{
+  margin:0;
+  padding-left: 18px;
+  color: var(--muted);
+  line-height:1.7;
+  font-size: 13.8px;
+}
+.abList li{ margin: 6px 0; }
+
+/* Pills */
+.abPills{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+.abPill{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:8px 10px;
+  border-radius:999px;
+  background: rgba(255,255,255,.06);
+  border: 1px solid var(--stroke2);
+  color: rgba(233,236,255,.86);
+  font-size: 13px;
+}
+
+.abPillIcon{
+  opacity:.9;
+}
+
+/* Callout */
+.abCallout{
+  margin-top: 12px;
+  display:flex;
+  gap:10px;
+  align-items:flex-start;
+  padding:12px;
+  border-radius: 18px;
+  background: rgba(255,255,255,.05);
+  border:1px solid var(--stroke2);
+  color: rgba(233,236,255,.76);
+  line-height:1.55;
+  font-size: 13.5px;
+}
+.abCallout i{
+  width:30px;
+  height:30px;
+  border-radius: 14px;
+  display:grid;
+  place-items:center;
+  background: rgba(255,255,255,.07);
+  border: 1px solid var(--stroke2);
+}
+
+/* Mini stats */
+.abMiniStats{
+  margin-top:12px;
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap:10px;
+}
+
+.abStat{
+  padding:12px;
+  border-radius: 18px;
+  background: rgba(255,255,255,.06);
+  border:1px solid var(--stroke2);
+}
+
+.abStatNum{
+  font-size: 18px;
+  font-weight: 950;
+}
+.abStatLabel{
+  margin-top:4px;
+  font-size: 12px;
+  color: rgba(233,236,255,.66);
+}
+
+/* Skills */
+.abStack{
+  display:grid;
+  gap:10px;
+}
+
+.abSkillTop{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom: 8px;
+}
+.abSkillTop b{
+  font-size: 14px;
+  letter-spacing: -0.2px;
+}
+
+.abTag{
+  font-size: 12px;
+  padding:6px 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.06);
+  border: 1px solid var(--stroke2);
+  color: rgba(233,236,255,.78);
+}
+
+.abBar{
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.08);
+  overflow:hidden;
+}
+
+.abFill{
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #a78bfa, #60a5fa, #22c55e);
+  box-shadow: 0 10px 30px rgba(96,165,250,.22);
+}
+
+/* Timeline */
+.abTimeline{
+  position:relative;
+  border-left: 2px solid rgba(255,255,255,.12);
+}
+
+.abTimelineItem{
+  padding-left: 14px;
+  position:relative;
+}
+
+.abTimelineItem:before{
+  content:"";
+  position:absolute;
+  left:-9px;
+  top: 6px;
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #a78bfa, #60a5fa);
+  box-shadow: 0 0 0 6px rgba(96,165,250,.12);
+}
+
+.abTimelineTop{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  align-items:center;
+  margin-bottom: 6px;
+}
+
+.abDate{
+  font-size: 12px;
+  color: rgba(233,236,255,.65);
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.05);
+  border: 1px solid var(--stroke2);
+}
+
+/* Paragraph */
+.abPara2{
+  margin:0 0 12px;
+  color: var(--muted);
+  line-height:1.75;
+  font-size: 13.8px;
+}
+
+code{
+  background: rgba(255,255,255,.07);
+  padding: 3px 6px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,.10);
+  color: rgba(233,236,255,.88);
+}
+
+/* Buttons block */
+.abBtns{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+/* Big Card */
+.abBig{
+  padding: 20px;
+}
+
+/* Footer */
+.abFooter{
+  width:min(1120px, 100%);
+  margin: 14px auto 0;
+  position:relative;
+  z-index:1;
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  color: rgba(233,236,255,.60);
+  font-size: 12.5px;
+}
+.abFooterDot{ opacity:.5; }
+
+
+
+/* ===============================
+   GLOBAL SMOOTH TRANSITIONS
+================================= */
+.abCard,
+.abBtnPrimary,
+.abBtnSoft,
+.abPill,
+.abStat,
+.abTag,
+.abAvatar,
+.abTimelineItem,
+.abSkill {
+  transition: all .28s cubic-bezier(.4,0,.2,1);
+}
+
+
+/* ===============================
+   CARD HOVER (Lift + Glow)
+================================= */
+.abCard:hover {
+  transform: translateY(-6px);
+  border-color: rgba(167,139,250,.45);
+  box-shadow:
+    0 25px 70px rgba(0,0,0,.6),
+    0 0 35px rgba(96,165,250,.18);
+}
+
+
+/* ===============================
+   BUTTON HOVER (Glow Expand)
+================================= */
+.abBtnPrimary:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow:
+    0 18px 60px rgba(96,165,250,.45),
+    0 0 40px rgba(167,139,250,.35);
+}
+
+.abBtnSoft:hover {
+  transform: translateY(-2px);
+  background: rgba(255,255,255,.12);
+  box-shadow: 0 0 20px rgba(255,255,255,.15);
+}
+
+
+/* ===============================
+   PILL HOVER
+================================= */
+.abPill:hover {
+  background: linear-gradient(90deg, rgba(167,139,250,.25), rgba(96,165,250,.25));
+  transform: scale(1.06);
+  border-color: rgba(167,139,250,.45);
+}
+
+
+/* ===============================
+   MINI STAT HOVER
+================================= */
+.abStat:hover {
+  transform: translateY(-4px);
+  background: rgba(255,255,255,.12);
+  box-shadow: 0 0 25px rgba(34,197,94,.15);
+}
+
+
+/* ===============================
+   SKILL BAR ANIMATION
+================================= */
+.abSkill:hover .abFill {
+  filter: brightness(1.15);
+  box-shadow: 0 0 25px rgba(96,165,250,.35);
+}
+
+
+/* ===============================
+   TIMELINE ITEM HOVER
+================================= */
+.abTimelineItem:hover {
+  transform: translateX(6px);
+}
+
+.abTimelineItem:hover:before {
+  box-shadow: 0 0 0 8px rgba(96,165,250,.25);
+}
+
+
+/* ===============================
+   AVATAR GLOW
+================================= */
+.abAvatar:hover {
+  transform: scale(1.08) rotate(4deg);
+  box-shadow:
+    0 0 30px rgba(96,165,250,.35),
+    0 0 50px rgba(167,139,250,.25);
+}
+
+
+/* ===============================
+   SECTION TITLE ICON HOVER
+================================= */
+.abH3:hover .abIcon {
+  background: linear-gradient(135deg, #a78bfa, #60a5fa);
+  color: #08101f;
+  transform: rotate(8deg) scale(1.08);
+}
+
+
+/* ===============================
+   BADGE HOVER
+================================= */
+.abBadge:hover {
+  background: rgba(255,255,255,.12);
+  box-shadow: 0 0 25px rgba(34,197,94,.20);
+}
+
+
+/* ===============================
+   SMOOTH FADE IN ON LOAD
+================================= */
+.abSection,
+.abHeader,
+.abGrid2 {
+  animation: fadeUp .8s ease forwards;
+  opacity: 0;
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+}
