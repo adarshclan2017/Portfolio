@@ -195,11 +195,11 @@ export default function Projects() {
           <div className="pGrid">
             {filtered.map((p) => {
               const techList = parseTechList(p.tech).slice(0, 6);
-              const github = ensureHttp(p.github || p.githubUrl || "");
-              const demo = ensureHttp(p.demo || p.live || p.link || "");
+              const github = p.github || p.githubUrl || "";
+              const demo = p.demo || p.live || p.link || "";
 
               return (
-                <article key={p._id || p.demo || p.github || p.title} className="pCard">
+                <article key={p._id || `${p.title}-${Math.random()}`} className="pCard">
                   {/* Image */}
                   <div className="pImgWrap">
                     {p.image ? (
@@ -263,7 +263,7 @@ export default function Projects() {
               <i className="fa-solid fa-folder-open" aria-hidden="true" />
             </div>
             <h3>No projects found</h3>
-
+            
             {projects.length ? (
               <button
                 className="pReset big"
