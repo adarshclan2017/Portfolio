@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "../styles/Home.css";
 
-const CHIPS = ["React", "Vite", "Node", "Express", "MongoDB", "JWT Auth", "REST APIs"];
+const CHIPS = ["HTML5","CSS3","BOOTSTRAP" ,"JavaScript" ,"React", "Vite", "Node", "Express", "MongoDB", "JWT Auth", "REST APIs"];
 
 const SIDE_HIGHLIGHTS = [
   { icon: "⚡", title: "Fast UI", desc: "Optimized components & clean code" },
@@ -93,7 +93,7 @@ export default function Home() {
             {/* Stats */}
             <div className="stats">
               <div className="stat">
-                <div className="statNum">10+</div>
+                <div className="statNum">5+</div>
                 <div className="statLabel">Projects</div>
               </div>
               <div className="stat">

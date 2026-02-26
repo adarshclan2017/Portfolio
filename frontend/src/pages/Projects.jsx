@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { api } from "../api/api";
-import "../styles/Projects.css";
+import "../styles/projects.css";
 
 function parseTechList(tech) {
   if (!tech) return [];
@@ -263,12 +263,7 @@ export default function Projects() {
               <i className="fa-solid fa-folder-open" aria-hidden="true" />
             </div>
             <h3>No projects found</h3>
-            <p>
-              {projects.length
-                ? "Try changing the search or filters."
-                : "Add projects from your Admin Dashboard, then they will show here."}
-            </p>
-
+            
             {projects.length ? (
               <button
                 className="pReset big"

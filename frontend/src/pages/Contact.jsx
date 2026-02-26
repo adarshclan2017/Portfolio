@@ -1,15 +1,17 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { api } from "../api/api";
-import "../styles/Contact.css"
+import "../styles/contact.css";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
-  const [status, setStatus] = useState({ type: "", text: "" }); // success | error
+  const [touched, setTouched] = useState({ name: false, email: false, message: false });
+  const [submitted, setSubmitted] = useState(false);
+
+  const [status, setStatus] = useState({ type: "", text: "" });
   const [loading, setLoading] = useState(false);
 
-  // small UX: auto-clear success after a few seconds
   useEffect(() => {
     if (status.type !== "success") return;
     const t = setTimeout(() => setStatus({ type: "", text: "" }), 4000);
@@ -30,18 +32,25 @@ export default function Contact() {
 
   const canSend = Object.keys(errors).length === 0 && !loading;
 
+  const showErr = (field) => (submitted || touched[field]) && errors[field];
+
   const onChange = (e) => {
     const { name, value } = e.target;
     setForm((p) => ({ ...p, [name]: value }));
+  };
+
+  const onBlur = (e) => {
+    const { name } = e.target;
+    setTouched((p) => ({ ...p, [name]: true }));
   };
 
   const submit = async (e) => {
     e.preventDefault();
     if (loading) return;
 
+    setSubmitted(true);
     setStatus({ type: "", text: "" });
 
-    // final validation before submit
     if (Object.keys(errors).length) {
       setStatus({ type: "error", text: "Please fix the highlighted fields." });
       return;
@@ -57,6 +66,8 @@ export default function Contact() {
 
       setStatus({ type: "success", text: "Message sent successfully!" });
       setForm({ name: "", email: "", message: "" });
+      setTouched({ name: false, email: false, message: false });
+      setSubmitted(false);
     } catch (err) {
       const msg =
         err?.response?.data?.message ||
@@ -77,7 +88,6 @@ export default function Contact() {
         </div>
 
         <div className="cGrid">
-          {/* Form */}
           <form className="cCard" onSubmit={submit} noValidate>
             <div className="cField">
               <label className="cLabel" htmlFor="name">
@@ -86,15 +96,16 @@ export default function Contact() {
               </label>
               <input
                 id="name"
-                className={`cInput ${errors.name ? "invalid" : ""}`}
+                className={`cInput ${showErr("name") ? "invalid" : ""}`}
                 name="name"
                 placeholder="Your name"
                 value={form.name}
                 onChange={onChange}
+                onBlur={onBlur}
                 autoComplete="name"
                 required
               />
-              {errors.name && <small className="cErr">{errors.name}</small>}
+              {showErr("name") && <small className="cErr">{errors.name}</small>}
             </div>
 
             <div className="cField">
@@ -104,16 +115,17 @@ export default function Contact() {
               </label>
               <input
                 id="email"
-                className={`cInput ${errors.email ? "invalid" : ""}`}
+                className={`cInput ${showErr("email") ? "invalid" : ""}`}
                 name="email"
                 type="email"
                 placeholder="yourmail@gmail.com"
                 value={form.email}
                 onChange={onChange}
+                onBlur={onBlur}
                 autoComplete="email"
                 required
               />
-              {errors.email && <small className="cErr">{errors.email}</small>}
+              {showErr("email") && <small className="cErr">{errors.email}</small>}
             </div>
 
             <div className="cField">
@@ -127,20 +139,17 @@ export default function Contact() {
 
               <textarea
                 id="message"
-                className={`cTextarea ${errors.message ? "invalid" : ""}`}
+                className={`cTextarea ${showErr("message") ? "invalid" : ""}`}
                 name="message"
                 placeholder="Write your message..."
                 value={form.message}
                 onChange={onChange}
+                onBlur={onBlur}
                 rows={6}
                 maxLength={500}
                 required
               />
-              {errors.message ? (
-                <small className="cErr">{errors.message}</small>
-              ) : (
-                <small className="cHelp">Include what you need, timeline, and any links.</small>
-              )}
+             
             </div>
 
             <button className="cBtn" disabled={!canSend}>
@@ -161,19 +170,19 @@ export default function Contact() {
             )}
           </form>
 
-          {/* Side card */}
-          <div className="cSide">
+          {/* side card unchanged */}
+           <div className="cSide">
             <div className="cSideCard">
               <h3 className="cSideTitle">Let’s build something</h3>
               <p className="cSideText">
-                I’m open to internships and junior roles. If you have a project or opportunity,
+               I’m open to entry-level or junior React / MERN stack developer roles. If you have a project or opportunity,
                 send me a message and I’ll respond as soon as possible.
               </p>
 
               <div className="cInfo">
                 <div className="cInfoRow">
                   <i className="fa-solid fa-location-dot" aria-hidden="true" />
-                  <span>India</span>
+                  <span>Tamil Nadu ,Kanniyakumari </span>
                 </div>
                 <div className="cInfoRow">
                   <i className="fa-solid fa-code" aria-hidden="true" />
@@ -186,18 +195,17 @@ export default function Contact() {
               </div>
 
               <div className="cLinks">
-                <a className="cLinkBtn" href="https://github.com/" target="_blank" rel="noreferrer">
+                <a className="cLinkBtn" href="https://github.com/adarshclan2017" target="_blank" rel="noreferrer">
                   <i className="fa-brands fa-github" aria-hidden="true" />
                   GitHub
                 </a>
 
-                <a className="cLinkBtn" href="https://www.linkedin.com/" target="_blank" rel="noreferrer">
+                <a className="cLinkBtn" href="https://www.linkedin.com/in/adarsh-i-j-14201a26bhttps://www.linkedin.com/in/adarsh-i-j-14201a26b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app/" target="_blank" rel="noreferrer">
                   <i className="fa-brands fa-linkedin" aria-hidden="true" />
                   LinkedIn
                 </a>
               </div>
 
-              <p className="cHint">Tip: Replace GitHub & LinkedIn with your real URLs.</p>
             </div>
           </div>
         </div>

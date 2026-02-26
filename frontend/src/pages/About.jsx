@@ -95,7 +95,7 @@ export default function About() {
         </h2>
 
         <p className="abPara">
-          I’m <b>Adarsh IJ</b>, a MERN Stack Developer. I enjoy building real-world
+          I’m <b>Adarsh IJ</b>, React js / MERN Stack Developer. I enjoy building real-world
           full-stack projects with responsive UI, REST APIs, admin dashboards and
           clean folder structure. I’m currently improving deployment and best practices
           to make production-ready apps.
@@ -108,7 +108,7 @@ export default function About() {
             </div>
             <div>
               <div className="abName">Adarsh IJ</div>
-              <div className="abRole">MERN / Full-Stack Developer</div>
+              <div className="abRole"> React js /MERN Full-Stack Developer</div>
             </div>
           </div>
 
@@ -140,7 +140,7 @@ export default function About() {
 
           <div className="abMiniStats">
             <div className="abStat">
-              <div className="abStatNum">10+</div>
+              <div className="abStatNum">5+</div>
               <div className="abStatLabel">Projects</div>
             </div>
             <div className="abStat">
@@ -180,8 +180,6 @@ export default function About() {
       <Section
         title="Skills"
         icon="fa-solid fa-chart-simple"
-        subtitle="Grouped skills with approximate confidence levels."
-        right={<span className="abHint">Tip: adjust levels anytime</span>}
       >
         <div className="abGrid3">
           <Card>
@@ -190,7 +188,7 @@ export default function About() {
               Frontend
             </div>
             <div className="abStack">
-              <SkillRow name="React" level={82} tag="Strong" />
+              <SkillRow name="React" level={72} tag="Intermediate" />
               <SkillRow name="React Router" level={75} tag="Strong" />
               <SkillRow name="Vite" level={70} tag="Intermediate" />
               <SkillRow name="HTML / CSS" level={78} tag="Strong" />
@@ -255,15 +253,30 @@ export default function About() {
               ]}
             />
           </Card>
+          <Card className="abTimeline">
+            <TimelineItem
+              title="Multi-Vendor E-Commerce Platform (MERN Stack)"
+              date="2025"
+              points={[
+                "Developed a full-stack multi-vendor marketplace using React, Node, Express, and MongoDB.",
+                "Implemented vendor registration, product management, and admin approval system.",
+                "Built secure authentication with JWT and protected routes for admin and vendors.",
+                "Integrated cart, order management, and dynamic product filtering features.",
+                "Handled product image uploads using Multer middleware and managed server-side storage.",
+              ]}
+            />
+          </Card>
 
           <Card className="abTimeline">
             <TimelineItem
-              title="Current Learning"
+              title="Currently Improving"
               date="Now"
               points={[
-                "TypeScript basics for React.",
-                "Deployment (Render/Vercel) + env handling.",
-                "Better UI design patterns and animations.",
+                "Optimizing MERN applications for performance and clean architecture.",
+                "Improving authentication flows (JWT, role-based access control).",
+                "Handling production deployment issues (CORS, env variables, API configs).",
+                "Writing cleaner reusable components and better folder structure.",
+                "Strengthening backend error handling and validation logic.",
               ]}
             />
           </Card>
@@ -281,7 +294,7 @@ export default function About() {
               <i className="fa-solid fa-file-arrow-down" aria-hidden="true" />
               Resume
             </div>
-            
+
 
             <a className="abBtnPrimary" href="/Adarsh IJ.pdf" download>
               <i className="fa-solid fa-download" aria-hidden="true" />
@@ -296,11 +309,11 @@ export default function About() {
             </div>
 
             <div className="abBtns">
-              <a className="abBtnSoft" href="https://github.com/" target="_blank" rel="noreferrer">
+              <a className="abBtnSoft" href="https://github.com/adarshclan2017" target="_blank" rel="noreferrer">
                 <i className="fa-brands fa-github" aria-hidden="true" />
                 GitHub
               </a>
-              <a className="abBtnSoft" href="https://www.linkedin.com/" target="_blank" rel="noreferrer">
+              <a className="abBtnSoft" href="https://www.linkedin.com/in/adarsh-i-j-14201a26bhttps://www.linkedin.com/in/adarsh-i-j-14201a26b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app/" target="_blank" rel="noreferrer">
                 <i className="fa-brands fa-linkedin" aria-hidden="true" />
                 LinkedIn
               </a>
@@ -313,7 +326,6 @@ export default function About() {
       <Section
         title="What I’m Looking For"
         icon="fa-solid fa-briefcase"
-        subtitle="This is important for recruiters."
       >
         <Card className="abBig">
           <p className="abPara2">
@@ -324,7 +336,7 @@ export default function About() {
         </Card>
       </Section>
 
-      
+
     </div>
   );
 }

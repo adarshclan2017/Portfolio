@@ -21,7 +21,7 @@ export default function Footer() {
 
           <div className="footSocial">
             <a
-              href="https://github.com/"
+              href="https://github.com/adarshclan2017"
               target="_blank"
               rel="noreferrer"
               aria-label="GitHub"
@@ -30,7 +30,7 @@ export default function Footer() {
             </a>
 
             <a
-              href="https://linkedin.com/"
+              href="https://www.linkedin.com/in/adarsh-i-j-14201a26b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
               target="_blank"
               rel="noreferrer"
               aria-label="LinkedIn"
@@ -39,7 +39,7 @@ export default function Footer() {
             </a>
 
             <a
-              href="mailto:yourgmail@gmail.com"
+              href="adarshclan2017@gmail.com"
               aria-label="Email"
             >
               <i className="fa-solid fa-envelope" />
@@ -65,7 +65,7 @@ export default function Footer() {
         <div className="footCTA">
           <h4 className="footNavTitle">Let’s Work Together</h4>
           <p className="footText">
-            Open to internships and junior developer roles.
+            open to entry-level or junior React / MERN stack developer roles
           </p>
 
           <Link to="/contact" className="footBtn">
