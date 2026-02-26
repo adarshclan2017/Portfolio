@@ -3,8 +3,9 @@ import { api } from "../api/api";
 import "../styles/Projects.css";
 
 function ensureHttp(url) {
-  const u = (url || "").trim();
+  const u = String(url || "").trim();
   if (!u) return "";
+  if (["null", "undefined", "na", "n/a", "-"].includes(u.toLowerCase())) return "";
   return /^https?:\/\//i.test(u) ? u : `https://${u}`;
 }
 
@@ -83,7 +84,6 @@ export default function Projects() {
 
   const filtered = useMemo(() => {
     const query = q.trim().toLowerCase();
-
     let list = [...projects];
 
     // filter by tech
@@ -122,9 +122,7 @@ export default function Projects() {
         <div className="projectsHead">
           <div>
             <h2 className="projectsTitle">Projects</h2>
-            <p className="projectsSub">
-              A few things I’ve built using React, Node, Express and MongoDB.
-            </p>
+            <p className="projectsSub">A few things I’ve built using React, Node, Express and MongoDB.</p>
           </div>
 
           {/* Controls */}
@@ -157,12 +155,7 @@ export default function Projects() {
               ))}
             </select>
 
-            <select
-              className="pSelect"
-              value={sort}
-              onChange={(e) => setSort(e.target.value)}
-              aria-label="Sort projects"
-            >
+            <select className="pSelect" value={sort} onChange={(e) => setSort(e.target.value)} aria-label="Sort projects">
               <option value="new">Newest</option>
               <option value="az">A – Z</option>
             </select>
@@ -200,9 +193,14 @@ export default function Projects() {
         ) : filtered.length ? (
           <div className="pGrid">
             {filtered.map((p) => {
-              const techList = parseTechList(p.tech).slice(0, 6);
+              const techList = parseTechList(p.tech).slice(0, 15);
+
               const github = ensureHttp(p.github || p.githubUrl || "");
-              const demo = ensureHttp(p.demo || p.live || p.link || "");
+
+              // ✅ UPDATED: demo supports more field names + safe ensureHttp
+              const demo = ensureHttp(
+                p.demo || p.demoUrl || p.live || p.liveUrl || p.link || p.website || p.url || ""
+              );
 
               return (
                 <article key={p._id || p.demo || p.github || p.title} className="pCard">

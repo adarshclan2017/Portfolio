@@ -3,6 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { api, authApi } from "../api/api";
 import "../styles/Admin.css";
 
+function ensureHttp(url) {
+  const u = String(url || "").trim();
+  if (!u) return "";
+  if (["null", "undefined", "na", "n/a", "-"].includes(u.toLowerCase())) return "";
+  return /^https?:\/\//i.test(u) ? u : `https://${u}`;
+}
+
 export default function AdminDashboard() {
   const nav = useNavigate();
   const adminApi = useMemo(() => authApi(), []);
@@ -128,7 +135,7 @@ export default function AdminDashboard() {
         description: form.description.trim(),
         tech: form.tech.trim(),
         github: (form.github || "").trim(),
-        demo: (form.demo || "").trim(),
+        demo: ensureHttp(form.demo), // ✅ only change: normalize demo url
         image: imageUrl,
       };
 
@@ -144,12 +151,7 @@ export default function AdminDashboard() {
       await loadProjects();
     } catch (err) {
       if (safe401(err)) return;
-      showToast(
-        err.response?.data?.message ||
-        err.response?.data?.error ||
-        "Save failed ❌",
-        "error"
-      );
+      showToast(err.response?.data?.message || err.response?.data?.error || "Save failed ❌", "error");
     } finally {
       setSaving(false);
     }
@@ -174,7 +176,6 @@ export default function AdminDashboard() {
     hideToast();
     try {
       await adminApi.delete(`/projects/${id}`);
-      // ✅ removes "unwanted text" by using toast only (no extra UI text)
       showToast("Project deleted ", "success");
       await loadProjects();
     } catch (err) {
@@ -213,9 +214,7 @@ export default function AdminDashboard() {
   };
 
   const sortedMessages = useMemo(() => {
-    return [...messages].sort(
-      (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-    );
+    return [...messages].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
   }, [messages]);
 
   const viewProjects = useMemo(() => {
@@ -233,13 +232,9 @@ export default function AdminDashboard() {
     if (projectSort === "az") {
       list.sort((a, b) => (a.title || "").localeCompare(b.title || ""));
     } else if (projectSort === "oldest") {
-      list.sort(
-        (a, b) => new Date(a.createdAt || 0) - new Date(b.createdAt || 0)
-      );
+      list.sort((a, b) => new Date(a.createdAt || 0) - new Date(b.createdAt || 0));
     } else {
-      list.sort(
-        (a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0)
-      );
+      list.sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0));
     }
 
     return list;
@@ -268,21 +263,11 @@ export default function AdminDashboard() {
           </div>
 
           <div className="actions">
-            <button
-              className="btn ghost"
-              onClick={loadProjects}
-              disabled={loadingProjects}
-              title="Refresh projects"
-            >
+            <button className="btn ghost" onClick={loadProjects} disabled={loadingProjects} title="Refresh projects">
               {loadingProjects ? "Refreshing..." : "Refresh Projects"}
             </button>
 
-            <button
-              className="btn ghost"
-              onClick={loadMessages}
-              disabled={loadingMessages}
-              title="Refresh messages"
-            >
+            <button className="btn ghost" onClick={loadMessages} disabled={loadingMessages} title="Refresh messages">
               {loadingMessages ? "Refreshing..." : "Refresh Messages"}
             </button>
 
@@ -330,20 +315,12 @@ export default function AdminDashboard() {
               <div className="row2">
                 <label className="field">
                   <span>Title</span>
-                  <input
-                    value={form.title}
-                    onChange={(e) => setForm({ ...form, title: e.target.value })}
-                    required
-                  />
+                  <input value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} required />
                 </label>
 
                 <label className="field">
                   <span>Tech</span>
-                  <input
-                    value={form.tech}
-                    onChange={(e) => setForm({ ...form, tech: e.target.value })}
-                    required
-                  />
+                  <input value={form.tech} onChange={(e) => setForm({ ...form, tech: e.target.value })} required />
                 </label>
               </div>
 
@@ -352,9 +329,7 @@ export default function AdminDashboard() {
                 <textarea
                   rows={4}
                   value={form.description}
-                  onChange={(e) =>
-                    setForm({ ...form, description: e.target.value })
-                  }
+                  onChange={(e) => setForm({ ...form, description: e.target.value })}
                   required
                 />
               </label>
@@ -362,14 +337,8 @@ export default function AdminDashboard() {
               <div className="row2">
                 <label className="field">
                   <span>GitHub</span>
-                  <input
-                    value={form.github}
-                    onChange={(e) =>
-                      setForm({ ...form, github: e.target.value })
-                    }
-                  />
+                  <input value={form.github} onChange={(e) => setForm({ ...form, github: e.target.value })} />
                 </label>
-
 
                 <label className="field">
                   <span>Live Demo</span>
@@ -383,26 +352,15 @@ export default function AdminDashboard() {
 
               <label className="field">
                 <span>Image URL</span>
-                <input
-                  value={form.image}
-                  onChange={(e) => setForm({ ...form, image: e.target.value })}
-                />
+                <input value={form.image} onChange={(e) => setForm({ ...form, image: e.target.value })} />
               </label>
-
-
 
               <div className="upload">
                 <div>
                   <div className="uploadTitle">Upload image (optional)</div>
-                  <div className="muted small">
-                    If selected, it overrides Image URL.
-                  </div>
+                  <div className="muted small">If selected, it overrides Image URL.</div>
                 </div>
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={(e) => setFile(e.target.files?.[0] || null)}
-                />
+                <input type="file" accept="image/*" onChange={(e) => setFile(e.target.files?.[0] || null)} />
               </div>
 
               <button className="btn primary" type="submit" disabled={saving}>
@@ -430,11 +388,7 @@ export default function AdminDashboard() {
                   }}
                 />
 
-                <select
-                  className="select"
-                  value={projectSort}
-                  onChange={(e) => setProjectSort(e.target.value)}
-                >
+                <select className="select" value={projectSort} onChange={(e) => setProjectSort(e.target.value)}>
                   <option value="newest">Newest</option>
                   <option value="oldest">Oldest</option>
                   <option value="az">A → Z</option>
@@ -454,30 +408,27 @@ export default function AdminDashboard() {
                 {viewProjects.map((p) => (
                   <article className="cardMini" key={p._id}>
                     <div className="thumb">
-                      {p.image ? (
-                        <img src={p.image} alt={p.title} />
-                      ) : (
-                        <div className="thumbEmpty">No image</div>
-                      )}
+                      {p.image ? <img src={p.image} alt={p.title} /> : <div className="thumbEmpty">No image</div>}
                     </div>
 
                     <div className="cardMiniBody">
                       <div className="cardMiniTitle">{p.title}</div>
                       <div className="muted small">{p.tech}</div>
-                      {p.demo && (
-                        <a className="muted small" href={p.demo} target="_blank" rel="noreferrer">
+
+                      {/* ✅ only change: normalize demo url when showing */}
+                      {ensureHttp(p.demo) ? (
+                        <a className="muted small" href={ensureHttp(p.demo)} target="_blank" rel="noreferrer">
                           Live Demo ↗
                         </a>
+                      ) : (
+                        <div className="muted small">No Demo</div>
                       )}
 
                       <div className="cardMiniBtns">
                         <button className="btn ghost" onClick={() => startEdit(p)}>
                           Edit
                         </button>
-                        <button
-                          className="btn danger"
-                          onClick={() => deleteProject(p._id)}
-                        >
+                        <button className="btn danger" onClick={() => deleteProject(p._id)}>
                           Delete
                         </button>
                       </div>
@@ -519,9 +470,7 @@ export default function AdminDashboard() {
             ) : !viewMessages.length ? (
               <div className="empty">
                 <b>No messages found</b>
-                <div className="muted small">
-                  Messages appear when users submit your contact form.
-                </div>
+                <div className="muted small">Messages appear when users submit your contact form.</div>
               </div>
             ) : (
               <div className="msgList">
@@ -532,18 +481,13 @@ export default function AdminDashboard() {
                         <div className="msgName">{m.name}</div>
                         <div className="muted small">{m.email}</div>
                       </div>
-                      <div className="muted small">
-                        {m.createdAt ? new Date(m.createdAt).toLocaleString() : ""}
-                      </div>
+                      <div className="muted small">{m.createdAt ? new Date(m.createdAt).toLocaleString() : ""}</div>
                     </div>
 
                     <p className="msgText">{m.message}</p>
 
                     <div className="msgActions">
-                      <button
-                        className="btn danger"
-                        onClick={() => deleteMessage(m._id)}
-                      >
+                      <button className="btn danger" onClick={() => deleteMessage(m._id)}>
                         Delete
                       </button>
                     </div>
