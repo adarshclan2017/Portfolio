@@ -446,3 +446,12 @@
   outline-offset: 3px;
   border-radius: 14px;
 }
+
+.pDesc{
+  overflow: visible !important;
+  display: block !important;
+  -webkit-line-clamp: unset !important;
+  -webkit-box-orient: unset !important;
+  max-height: none !important;
+  white-space: normal !important;
+}

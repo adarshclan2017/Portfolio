@@ -17,7 +17,17 @@ router.get("/", async (req, res) => {
 // admin create
 router.post("/", requireAdmin, async (req, res) => {
   try {
-    const project = await Project.create(req.body);
+    const { title, description, tech, github, demo, image } = req.body;
+
+    const project = await Project.create({
+      title,
+      description,
+      tech,
+      github: github || "",
+      demo: demo || "",
+      image: image || "",
+    });
+
     res.status(201).json(project);
   } catch (e) {
     res.status(400).json({ message: e.message });
@@ -27,17 +37,27 @@ router.post("/", requireAdmin, async (req, res) => {
 // admin update
 router.put("/:id", requireAdmin, async (req, res) => {
   try {
-    const updated = await Project.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true
-    });
+    const { title, description, tech, github, demo, image } = req.body;
+
+    const updated = await Project.findByIdAndUpdate(
+      req.params.id,
+      {
+        title,
+        description,
+        tech,
+        github: github || "",
+        demo: demo || "",
+        image: image || "",
+      },
+      { new: true, runValidators: true }
+    );
+
     if (!updated) return res.status(404).json({ message: "Not found" });
     res.json(updated);
   } catch (e) {
     res.status(400).json({ message: e.message });
   }
 });
-
 // admin delete
 router.delete("/:id", requireAdmin, async (req, res) => {
   try {
