@@ -57,7 +57,7 @@ export default function AdminDashboard() {
   const reset = () => {
     setEditingId(null);
     setFile(null);
-    setForm({ title: "", description: "", tech: "", github: "", image: "" });
+    setForm({ title: "", description: "", tech: "", github: "", demo: "", image: "" });
   };
 
   const [form, setForm] = useState({
@@ -65,6 +65,7 @@ export default function AdminDashboard() {
     description: "",
     tech: "",
     github: "",
+    demo: "",
     image: "",
   });
 
@@ -127,6 +128,7 @@ export default function AdminDashboard() {
         description: form.description.trim(),
         tech: form.tech.trim(),
         github: (form.github || "").trim(),
+        demo: (form.demo || "").trim(),
         image: imageUrl,
       };
 
@@ -144,8 +146,8 @@ export default function AdminDashboard() {
       if (safe401(err)) return;
       showToast(
         err.response?.data?.message ||
-          err.response?.data?.error ||
-          "Save failed ❌",
+        err.response?.data?.error ||
+        "Save failed ❌",
         "error"
       );
     } finally {
@@ -161,6 +163,7 @@ export default function AdminDashboard() {
       description: p.description || "",
       tech: p.tech || "",
       github: p.github || "",
+      demo: p.demo || p.live || p.link || "",
       image: p.image || "",
     });
     setFile(null);
@@ -367,14 +370,26 @@ export default function AdminDashboard() {
                   />
                 </label>
 
+
                 <label className="field">
-                  <span>Image URL</span>
+                  <span>Live Demo</span>
                   <input
-                    value={form.image}
-                    onChange={(e) => setForm({ ...form, image: e.target.value })}
+                    value={form.demo}
+                    onChange={(e) => setForm({ ...form, demo: e.target.value })}
+                    placeholder="https://your-live-link.com"
                   />
                 </label>
               </div>
+
+              <label className="field">
+                <span>Image URL</span>
+                <input
+                  value={form.image}
+                  onChange={(e) => setForm({ ...form, image: e.target.value })}
+                />
+              </label>
+
+
 
               <div className="upload">
                 <div>
@@ -449,6 +464,11 @@ export default function AdminDashboard() {
                     <div className="cardMiniBody">
                       <div className="cardMiniTitle">{p.title}</div>
                       <div className="muted small">{p.tech}</div>
+                      {p.demo && (
+                        <a className="muted small" href={p.demo} target="_blank" rel="noreferrer">
+                          Live Demo ↗
+                        </a>
+                      )}
 
                       <div className="cardMiniBtns">
                         <button className="btn ghost" onClick={() => startEdit(p)}>

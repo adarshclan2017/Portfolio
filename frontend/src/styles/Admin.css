@@ -751,3 +751,31 @@ body.dark .uploadRow{
   outline-offset: 3px;
   border-radius: 14px;
 }
+
+/* Live Demo link (matches your glass theme) */
+.cardMiniBody a.muted.small{
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  width: fit-content;
+
+  margin-top: 2px;
+  padding: 6px 10px;
+  border-radius: 999px;
+
+  border: 1px solid rgba(110,231,255,0.25);          /* uses your --primary vibe */
+  background: rgba(110,231,255,0.10);
+  color: var(--text);
+
+  text-decoration: none;
+  transition: transform .08s ease, background .18s ease, border-color .18s ease;
+}
+
+.cardMiniBody a.muted.small:hover{
+  background: rgba(110,231,255,0.16);
+  border-color: rgba(110,231,255,0.45);
+}
+
+.cardMiniBody a.muted.small:active{
+  transform: translateY(1px);
+}

@@ -6,6 +6,7 @@ const projectSchema = new mongoose.Schema(
     description: { type: String, required: true, trim: true },
     tech: { type: String, required: true, trim: true },
     github: { type: String, default: "", trim: true },
+    demo: { type: String, default: "", trim: true },
     image: { type: String, default: "", trim: true }
   },
   { timestamps: true }
