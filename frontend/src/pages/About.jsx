@@ -1,5 +1,6 @@
 import React from "react";
 import "../styles/About.css";
+import { Link } from "react-router-dom";
 
 const Section = ({ title, subtitle, icon, children, right }) => (
   <section className="abSection">
@@ -117,10 +118,10 @@ export default function About() {
               <i className="fa-solid fa-download" aria-hidden="true" />
               Download Resume
             </a>
-            <a className="abBtnSoft" href="/projects">
+            <Link className="abBtnSoft" to="/projects">
               <i className="fa-solid fa-layer-group" aria-hidden="true" />
               View Projects
-            </a>
+            </Link>
           </div>
         </div>
       </header>
